@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e081f358-66b4-412f-9aec-33ad9853971d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/node-app/config/keys.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node-app/models/User.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node-app/routes/api/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node-app/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/node-app/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="e081f358-66b4-412f-9aec-33ad9853971d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -25,7 +18,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.58489096">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/node-app/server.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="266">
@@ -61,11 +54,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/node-app/config/keys.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="38">
-                  <caret line="2" selection-start-line="2" selection-end-line="2" />
+                <state relative-caret-position="19">
+                  <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -78,7 +71,7 @@
             <entry file="file://$PROJECT_DIR$/node-app/config/keys.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="19">
-                  <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+                  <caret line="1" column="57" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
                 </state>
               </provider>
             </entry>
@@ -172,12 +165,12 @@
       <option name="presentableId" value="Default" />
       <updated>1561529306457</updated>
       <workItem from="1561529308424" duration="1062000" />
-      <workItem from="1561533039198" duration="4366000" />
+      <workItem from="1561533039198" duration="4630000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5428000" />
+    <option name="totallyTimeSpent" value="5692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1305" height="1080" extended-state="6" />
@@ -237,7 +230,7 @@
     <entry file="file://$PROJECT_DIR$/node-app/config/keys.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
         </state>
       </provider>
     </entry>

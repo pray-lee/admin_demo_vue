@@ -6,21 +6,18 @@ const User = require('../../models/User')
 const secret = require('../../config/keys').secretOrPrivateKey
 const passport = require('passport')
 
-router.get('/test', (req, res) => {
-    res.json({msg: 'hello users'})
-})
-
 // register
 router.post('/register', (req, res) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if (user) {
-                res.status(400).send({msg: '该邮箱已被注册'})
+                res.status(400).json('该用户已被注册')
             } else {
                 const newUser = new User({
                     name: req.body.name,
                     password: req.body.password,
-                    email: req.body.email
+                    email: req.body.email,
+                    identity: req.body.identity
                 })
 
                 // password hash
@@ -29,7 +26,7 @@ router.post('/register', (req, res) => {
                         newUser.password = hash
                         // save new user
                         newUser.save()
-                            .then(user => res.send(user))
+                            .then(user => res.json(user))
                             .catch(err => console.log(err))
                     })
                 })
@@ -44,14 +41,19 @@ router.post('/login', (req, res) => {
     User.findOne({email})
         .then(user => {
             if (!user) {
-               res.status(404).json({msg: '用户不存在'})
+               res.status(404).json('用户不存在')
             } else {
                 // check password
                 bcrypt.compare(password, user.password)
                     .then(isMatched => {
                         if (isMatched) {
-                            // set token
-                            const rule = {name: user.name, email: user.email}
+                            // 当验证成功时，需要返回的数据
+                            const rule = {
+                                id: user.id,
+                                name: user.name,
+                                email: user.email,
+                                identity: user.identity
+                            }
                             jwt.sign(rule, secret, {expiresIn: 3600}, (err, token) => {
                                 res.json({
                                     msg: '登录成功',
@@ -59,7 +61,7 @@ router.post('/login', (req, res) => {
                                 })
                             })
                         } else {
-                            res.status(404).json({msg: '密码错误'})
+                            res.status(404).json('密码错误')
                         }
                     })
             }
@@ -71,7 +73,8 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     res.json({
         name: req.user.name,
         id: req.user.id,
-        email:req.user.email
+        email:req.user.email,
+        idendity: req.user.identity
     })
 })
 

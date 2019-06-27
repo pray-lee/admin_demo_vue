@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const port = process.env.PORT || 3000
 const db = require('./config/keys').mongoURI
 const user = require('./routes/api/user')
+const profile = require('./routes/api/profile')
 const passport = require('passport')
 
 // passport init
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 
 // router
 app.use('/api/user', user)
+app.use('/api/profile', profile)
 
 // connect mongodb
 mongoose.connect(db, { useNewUrlParser: true })

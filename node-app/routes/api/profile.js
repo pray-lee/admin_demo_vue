@@ -62,8 +62,7 @@ router.post('/update/:id', passport.authenticate('jwt', {session:false}), (req, 
 router.delete('/delete/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     Profile.findOneAndDelete({_id: req.params.id})
         .then(profile => {
-            profile.save()
-                .then(() => res.json('删除成功'))
+            res.json('删除成功')
         })
         .catch(err => res.json('删除失败'))
 })

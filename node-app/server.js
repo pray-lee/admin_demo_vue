@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const bodyParser = require('body-parser')
 const mongoose = require("mongoose")
 const port = process.env.PORT || 3000
 const db = require('./config/keys').mongoURI
@@ -9,6 +10,10 @@ const user = require('./routes/api/user')
 app.get('/', (req, res) => {
     res.send('hello node')
 })
+
+// 解析post数据
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 // router
 app.use('/api/user', user)

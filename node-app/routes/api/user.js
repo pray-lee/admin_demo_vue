@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const User = require('../../models/User')
+const secret = require('../../config/keys').secretOrPrivateKey
+const passport = require('passport')
 
 router.get('/test', (req, res) => {
     res.json({msg: 'hello users'})
@@ -43,14 +46,33 @@ router.post('/login', (req, res) => {
             if (!user) {
                res.status(404).json({msg: '用户不存在'})
             } else {
+                // check password
                 bcrypt.compare(password, user.password)
                     .then(isMatched => {
-                        isMatched ?
-                            res.json({msg: '登陆成功'}) :
-                            res.status(400).json({msg: '密码错误'})
+                        if (isMatched) {
+                            // set token
+                            const rule = {name: user.name, email: user.email}
+                            jwt.sign(rule, secret, {expiresIn: 3600}, (err, token) => {
+                                res.json({
+                                    msg: '登录成功',
+                                    token: `Bearer ${token}`
+                                })
+                            })
+                        } else {
+                            res.status(404).json({msg: '密码错误'})
+                        }
                     })
             }
         })
+})
+
+// getInfo
+router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
+    res.json({
+        name: req.user.name,
+        id: req.user.id,
+        email:req.user.email
+    })
 })
 
 module.exports = router

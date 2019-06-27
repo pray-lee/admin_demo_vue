@@ -5,11 +5,12 @@ const mongoose = require("mongoose")
 const port = process.env.PORT || 3000
 const db = require('./config/keys').mongoURI
 const user = require('./routes/api/user')
+const passport = require('passport')
 
-// test
-app.get('/', (req, res) => {
-    res.send('hello node')
-})
+// passport init
+app.use(passport.initialize())
+// valid token
+require('./config/passport')(passport)
 
 // 解析post数据
 app.use(bodyParser.urlencoded({extended: false}))

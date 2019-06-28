@@ -10,8 +10,9 @@ const passport = require('passport')
 router.post('/register', (req, res) => {
     User.findOne({email: req.body.email})
         .then(user => {
+            debugger
             if (user) {
-                res.status(400).json('该用户已被注册')
+                res.status(404).json('该用户已被注册')
             } else {
                 const newUser = new User({
                     name: req.body.name,

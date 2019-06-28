@@ -10,9 +10,8 @@ const passport = require('passport')
 router.post('/register', (req, res) => {
     User.findOne({email: req.body.email})
         .then(user => {
-            debugger
             if (user) {
-                res.status(404).json('该用户已被注册')
+                res.status(400).json('该用户已被注册')
             } else {
                 const newUser = new User({
                     name: req.body.name,
@@ -48,7 +47,7 @@ router.post('/login', (req, res) => {
                 bcrypt.compare(password, user.password)
                     .then(isMatched => {
                         if (isMatched) {
-                            // 当验证成功时，需要返回的数据
+                            // 当验证成功时，需要返回给req.uesr的数据
                             const rule = {
                                 id: user.id,
                                 name: user.name,
@@ -62,7 +61,7 @@ router.post('/login', (req, res) => {
                                 })
                             })
                         } else {
-                            res.status(404).json('密码错误')
+                            res.status(200).json('密码错误')
                         }
                     })
             }

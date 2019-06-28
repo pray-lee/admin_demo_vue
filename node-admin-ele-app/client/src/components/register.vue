@@ -73,22 +73,16 @@ export default {
   },
   methods: {
     submitForm (formName) {
-      const user = {
-        name: this.registerUser.name,
-        email: this.registerUser.email,
-        password: this.registerUser.password,
-        identity: this.registerUser.identity
-      }
       this.$refs[formName].validate(valid => {
         if (valid) {
-          register(user)
+          register(this.registerUser)
             .then(res => {
               this.$message({
                 message: '恭喜，账号注册成功',
                 type: 'success'
               })
               this.$router.push('/login')
-            })
+            }, err => {console.log(err)})
         }
       })
     },

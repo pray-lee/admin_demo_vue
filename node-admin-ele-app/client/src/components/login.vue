@@ -19,6 +19,7 @@
 </template>
 <script>
 import { login } from '@/api/user/login'
+import jwt_decode from 'jwt-decode'
 export default {
   name: 'login',
   data () {
@@ -46,10 +47,17 @@ export default {
               const { token } = res.data
               // save token
               localStorage.setItem('eleToken', token)
+
+              // parse token to vuex
+              const user = jwt_decode(token)
+              this.$store.dispatch('setAuth', !this.isEmpty(user))
+              this.$store.dispatch('setUser', user)
+
               this.$message({
                 message: '登录成功',
                 type: 'success'
               })
+
               this.$router.push('/index')
             }, err => console.log(err))
         }
@@ -57,6 +65,9 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    isEmpty (obj) {
+      return Object.keys(obj).length === 0 ? true : false
     }
   }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '@/router'
 import { baseURL } from '@/config'
 import { Loading, Message } from 'element-ui'
 
@@ -32,6 +33,8 @@ class HttpRequest {
     instance.interceptors.request.use(config => {
       // loading start
       startLoading()
+      // request with token
+      config.headers.Authorization = localStorage.getItem('eleToken')
       return config
     }, err => Promise.reject(err))
 
@@ -41,7 +44,14 @@ class HttpRequest {
       return response
     }, err => {
       endLoading()
-      Message.error('服务器异常')
+      Message.error(err.response.data)
+      // 获取错误状态码
+      const { status } = err.response
+      if (status == 401) {
+        Message.error('token失效，请重新登录')
+        localStorage.removeItem('eleToken')
+        router.push('/login')
+      }
       return Promise.reject(err)
     })
   }

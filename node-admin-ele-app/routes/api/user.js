@@ -54,7 +54,7 @@ router.post('/login', (req, res) => {
                                 email: user.email,
                                 identity: user.identity
                             }
-                            jwt.sign(rule, secret, {expiresIn: 3600}, (err, token) => {
+                            jwt.sign(rule, secret, {expiresIn: 1}, (err, token) => {
                                 res.json({
                                     msg: '登录成功',
                                     token: `Bearer ${token}`

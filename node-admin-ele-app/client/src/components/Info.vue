@@ -1,10 +1,10 @@
 <template>
-  <div class="notfound">
-    404, nmb
+  <div class="info">
+    im info
   </div>
 </template>
 <script>
 export default {
-  name: 'notFound'
+  name: 'info'
 }
 </script>

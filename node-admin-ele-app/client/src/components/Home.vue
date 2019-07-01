@@ -1,10 +1,10 @@
 <template>
-  <div class="notfound">
-    404, nmb
+  <div class="home">
+    im home, fuck you evan you
   </div>
 </template>
 <script>
 export default {
-  name: 'notFound'
+  name: 'home'
 }
 </script>

@@ -1,10 +1,18 @@
 <template>
   <div class="index">
-    初始化页面
+    <HeaderNav></HeaderNav>
+    <LeftNav></LeftNav>
+    <router-view></router-view>
   </div>
 </template>
 <script>
+import HeaderNav from './headerNav'
+import LeftNav from './leftNav'
 export default {
-  name: 'index'
+  name: 'index',
+  components: {
+    HeaderNav,
+    LeftNav
+  }
 }
 </script>

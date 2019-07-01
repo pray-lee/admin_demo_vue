@@ -24,11 +24,14 @@ const getters = {
 //actions
 const actions = {
   setAuth ({commit}, isAuth) {
-    console.log(isAuth)
     commit(type.SET_AUTH, isAuth)
   },
   setUser ({commit}, user) {
     commit(type.SET_USER, user)
+  },
+  clearCurrentState ({commit}) {
+    commit(type.SET_AUTH, false)
+    commit(type.SET_USER, {})
   }
 }
 

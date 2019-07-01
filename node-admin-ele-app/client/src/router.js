@@ -29,7 +29,7 @@ const router = new Router({
         {
           path: 'home',
           component: Home
-        }
+        },
       ]
     },
     {

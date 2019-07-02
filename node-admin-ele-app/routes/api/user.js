@@ -11,7 +11,10 @@ router.post('/register', (req, res) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if (user) {
-                res.status(400).json('该用户已被注册')
+                res.status(200).json({
+                    errno: -1,
+                    message: '该用户已被注册'
+                })
             } else {
                 const newUser = new User({
                     name: req.body.name,
@@ -54,7 +57,7 @@ router.post('/login', (req, res) => {
                                 email: user.email,
                                 identity: user.identity
                             }
-                            jwt.sign(rule, secret, {expiresIn: 1}, (err, token) => {
+                            jwt.sign(rule, secret, {expiresIn: 3600}, (err, token) => {
                                 res.json({
                                     msg: '登录成功',
                                     token: `Bearer ${token}`

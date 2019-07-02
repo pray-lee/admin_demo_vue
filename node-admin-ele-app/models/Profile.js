@@ -16,6 +16,10 @@ const ProfileSchema = new Schema({
         type: 'string',
         required: true
     },
+    cash: {
+        type: 'string',
+        required: true
+    },
     describe: {
         type: 'string',
     },

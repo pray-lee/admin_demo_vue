@@ -2,7 +2,9 @@
   <div class="index">
     <HeaderNav></HeaderNav>
     <LeftNav></LeftNav>
-    <router-view></router-view>
+    <main class="main-area">
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 <script>
@@ -16,3 +18,9 @@ export default {
   }
 }
 </script>
+<style lang="stylus" scoped>
+  .main-area
+    overflow-x: hidden
+    overflow-y:scroll
+    height:calc(100vh - 60px)
+</style>

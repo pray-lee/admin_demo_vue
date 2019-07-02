@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import { register } from '@/api/user/register'
+import register from '@/api/user/register'
 export default {
   name: 'register',
   data () {
@@ -77,11 +77,15 @@ export default {
         if (valid) {
           register(this.registerUser)
             .then(res => {
-              this.$message({
-                message: '恭喜，账号注册成功',
-                type: 'success'
-              })
-              this.$router.push('/login')
+              if (!(res.data.errno === -1)) {
+                this.$message({
+                  message: '恭喜，账号注册成功',
+                  type: 'success'
+                })
+                this.$router.push('/login')
+              } else {
+                this.$message.error(res.data.message)
+              }
             }, err => {console.log(err)})
         }
       })

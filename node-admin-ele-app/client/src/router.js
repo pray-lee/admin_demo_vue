@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './components/index'
 import Home from './components/Home'
-import Info from './components/Info'
+import InfoShow from './components/Info'
+import FundList from './components/FundList'
 import Register from './components/register'
 import Login from './components/login'
 import NotFound from './components/notfound'
@@ -29,6 +30,14 @@ const router = new Router({
         {
           path: 'home',
           component: Home
+        },
+        {
+          path: 'fundlist',
+          component: FundList
+        },
+        {
+          path: 'infoshow',
+          component: InfoShow
         },
       ]
     },

@@ -3,49 +3,41 @@
     <el-row class="menu-page">
       <el-col>
         <el-menu
-          default-active="2"
+          default-active="/index/home"
           background-color="#545c64"
           text-color="#fff"
-          active-text-color="#ffd04b">
-          <template v-for="item in items">
-            <router-link v-if="!item.children.length" :to="item.path">
-              <el-menu-item v-if="!item.children.length" :index="item.path">
-                <i class="el-icon-setting"></i>
-                <span slot="title">{{item.name}}</span>
-              </el-menu-item>
-            </router-link>
-            <el-submenu :index="item.path" v-else>
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>{{item.name}}</span>
-              </template>
-              <router-link v-for="child in item.children" :to="child.path">
-                <el-menu-item :index="child.path">{{child.name}}</el-menu-item>
-              </router-link>
-            </el-submenu>
-          </template>
+          active-text-color="yellow">
+          <Item :item="item" v-for="item in items" :key="item.path"></Item>
         </el-menu>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-export default {
-  name: 'leftUav',
-  data () {
-    return {
-      items: [
-        { name: '首页', path: 'home', children: [] },
-        { name: '资金管理', path: 'fund', children: [ { path: 'fundlist', name: '资金流水' } ] },
-        { name: '信息管理', path: 'info', children: [ { path: 'infoshow', name: '个人信息' } ] }
-      ]
+  import Item from './liItem'
+
+  export default {
+    name: 'leftUav',
+    components: {
+      Item
+    },
+    data() {
+      return {
+        items: [
+          {name: '主页', path: 'home', children: []},
+          {name: '资金管理', path: 'fund', children: [{path: '/index/fundlist', name: '资金流水'}]},
+          {name: '信息管理', path: 'info', children: [{path: '/index/infoshow', name: '个人信息'}]}
+        ]
+      }
     }
   }
-}
 </script>
 <style lang="stylus" scoped>
   .left-nav
     width: 220px
+    float: left
+
     .el-menu
-      min-height:calc(100vh - 60px)
+      min-height: calc(100vh - 60px)
+
 </style>

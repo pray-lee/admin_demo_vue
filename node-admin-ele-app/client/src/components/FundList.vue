@@ -92,7 +92,7 @@
       </el-table>
     </div>
     <div class="dialog-container">
-      <addDialog :dialogStatus="dialogStatus"></addDialog>
+      <addDialog :dialogStatus="dialogStatus" @finished="updateProfile"></addDialog>
     </div>
   </div>
 </template>
@@ -113,14 +113,17 @@
       }
     },
     created() {
-      getProfiles()
-        .then(res => {
-          if (res.status === 200) {
-            this.list = res.data
-          }
-        })
+      this.getAllProfiles()
     },
     methods: {
+      getAllProfiles () {
+        getProfiles()
+          .then(res => {
+            if (res.status === 200) {
+              this.list = res.data
+            }
+          })
+      },
       handleEdit(index, row) {
         console.log(index, row);
       },
@@ -129,6 +132,9 @@
       },
       handleAdd () {
         this.dialogStatus.show = true
+      },
+      updateProfile () {
+        this.getAllProfiles()
       }
     }
   }

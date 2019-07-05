@@ -53,6 +53,7 @@
   </el-dialog>
 </template>
 <script>
+import addProfile from '@/api/profile/addProfile'
 export default {
   name: 'Dialog',
   data () {
@@ -100,6 +101,20 @@ export default {
       this.$refs[form].validate(valid => {
         if (valid) {
           // commit add data
+          addProfile(this.form)
+            .then(res => {
+              this.$message({
+                type: 'success',
+                message: '添加成功'
+              })
+
+              //close dialog
+              this.dialogStatus.show = false
+
+              // reload
+              this.$emit('finished')
+            })
+            .catch(err => console.log(err))
         }
       })
     }

@@ -11,62 +11,60 @@ import NotFound from './components/notfound'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      redirect: '/index'
-    },
-    {
-      path: '/index',
-      name: 'index',
-      component: Index,
-      children: [
-        {
-          path: '',
-          component: Home
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [{
+            path: '/',
+            redirect: '/index'
         },
         {
-          path: 'home',
-          component: Home
+            path: '/index',
+            name: 'index',
+            component: Index,
+            children: [{
+                    path: '',
+                    redirect: 'home'
+                },
+                {
+                    path: 'home',
+                    component: Home
+                },
+                {
+                    path: 'fundlist',
+                    component: FundList
+                },
+                {
+                    path: 'infoshow',
+                    component: InfoShow
+                },
+            ]
         },
         {
-          path: 'fundlist',
-          component: FundList
+            path: '/register',
+            name: 'register',
+            component: Register
         },
         {
-          path: 'infoshow',
-          component: InfoShow
+            path: '/login',
+            name: 'login',
+            component: Login
         },
-      ]
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '*',
-      name: 'notFound',
-      component: NotFound
-    }
-  ]
+        {
+            path: '*',
+            name: 'notFound',
+            component: NotFound
+        }
+    ]
 })
 
 // handle login logic by using router guard
 router.beforeEach((to, from, next) => {
-  const isLogin = localStorage.getItem('eleToken') ? true : false
-  if (to.path === '/login' || to.path === '/register') {
-    next()
-  } else {
-    isLogin ? next() : next('/login')
-  }
+    const isLogin = localStorage.getItem('eleToken') ? true : false
+    if (to.path === '/login' || to.path === '/register') {
+        next()
+    } else {
+        isLogin ? next() : next('/login')
+    }
 })
 
 export default router

@@ -21,6 +21,6 @@ export default {
 <style lang="stylus" scoped>
   .main-area
     overflow-x: hidden
-    overflow-y:scroll
+    overflow-y:auto
     height:calc(100vh - 60px)
 </style>

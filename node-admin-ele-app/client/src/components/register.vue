@@ -75,20 +75,23 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          register(this.registerUser)
-            .then(res => {
-              if (!(res.data.errno === -1)) {
-                this.$message({
-                  message: '恭喜，账号注册成功',
-                  type: 'success'
-                })
-                this.$router.push('/login')
-              } else {
-                this.$message.error(res.data.message)
-              }
-            }, err => {console.log(err)})
+          this.handleRegister(this.registerUser)
         }
       })
+    },
+    handleRegister (user) {
+      register(user)
+        .then(res => {
+          if (!(res.data.errno === -1)) {
+            this.$message({
+              message: '恭喜，账号注册成功',
+              type: 'success'
+            })
+            this.$router.push('/login')
+          } else {
+            this.$message.error(res.data.message)
+          }
+        }, err => {console.log(err)})
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

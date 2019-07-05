@@ -42,26 +42,29 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          login(this.loginUser)
-            .then(res => {
-              const { token } = res.data
-              // save token
-              localStorage.setItem('eleToken', token)
-
-              // parse token to vuex
-              const user = jwt_decode(token)
-              this.$store.dispatch('setAuth', !this.isEmpty(user))
-              this.$store.dispatch('setUser', user)
-
-              this.$message({
-                message: '登录成功',
-                type: 'success'
-              })
-
-              this.$router.push('/index')
-            }, err => console.log(err))
+          this.handleLogin(this.loginUser)
         }
       })
+    },
+    handleLogin (user) {
+      login(user)
+        .then(res => {
+          const { token } = res.data
+          // save token
+          localStorage.setItem('eleToken', token)
+
+          // parse token to vuex
+          const user = jwt_decode(token)
+          this.$store.dispatch('setAuth', !this.isEmpty(user))
+          this.$store.dispatch('setUser', user)
+
+          this.$message({
+            message: '登录成功',
+            type: 'success'
+          })
+
+          this.$router.push('/index')
+        }, err => console.log(err))
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

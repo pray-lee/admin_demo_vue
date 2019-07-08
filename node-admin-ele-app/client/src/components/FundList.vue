@@ -98,6 +98,7 @@
 </template>
 <script>
   import getProfiles from '@/api/profile/getProfiles'
+  import delProfile from '@/api/profile/delProfile'
   import addDialog from './dialog'
   export default {
     name: 'fundList',
@@ -128,7 +129,16 @@
         console.log(index, row);
       },
       handleDelete(index, row) {
-        console.log(index, row);
+        delProfile(row._id) 
+          .then(res => {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            // reload
+            this.updateProfile()
+          })
+          .catch(err => console.log(err))
       },
       handleAdd () {
         this.dialogStatus.show = true

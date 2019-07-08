@@ -92,7 +92,7 @@
       </el-table>
     </div>
     <div class="dialog-container">
-      <addDialog :dialogStatus="dialogStatus" @finished="updateProfile"></addDialog>
+      <addDialog :dialogStatus="dialogStatus" :form="form" @finished="updateProfile"></addDialog>
     </div>
   </div>
 </template>
@@ -109,8 +109,18 @@
       return {
         list: [],
         dialogStatus: {
-          show: false
-        }
+          show: false,
+          title: '',
+          type: 'add'
+        },
+        form: {
+          remark: '',
+          cash: '',
+          income: '',
+          expend: '',
+          describe: '',
+          type: ''
+        },
       }
     },
     created() {
@@ -125,8 +135,28 @@
             }
           })
       },
+      handleAdd () {
+        this.dialogStatus = {
+          show: true,
+          title: '添加资产',
+          type: 'add'
+        }
+      },
       handleEdit(index, row) {
-        console.log(index, row);
+        this.form = {
+         remark: row.remark,
+          cash: row.cash,
+          income: row.income,
+          expend: row.expend,
+          describe: row.describe,
+          type: row.type,
+          id: row._id
+        }
+        this.dialogStatus = {
+          show: true,
+          title: '修改资产',
+          type: 'edit'
+        }
       },
       handleDelete(index, row) {
         delProfile(row._id) 
@@ -139,9 +169,6 @@
             this.updateProfile()
           })
           .catch(err => console.log(err))
-      },
-      handleAdd () {
-        this.dialogStatus.show = true
       },
       updateProfile () {
         this.getAllProfiles()

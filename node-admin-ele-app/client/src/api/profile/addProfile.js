@@ -1,6 +1,11 @@
 import axios from '@/api/index'
-export default data => axios.request({
-    method: "POST",
-    url: '/api/profile/add',
-    data
-})
+
+// type: add, edit
+export default (data, type, id) => {
+    const url = type === 'add' ? '/api/profile/add' : `/api/profile/update/${data.id}`
+    return axios.request({
+        method: "POST",
+        url: url,
+        data
+    })
+}

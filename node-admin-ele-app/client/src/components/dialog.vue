@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="献上你的宝贝" :visible.sync="dialogStatus.show" center>
+  <el-dialog :title="dialogStatus.title" :visible.sync="dialogStatus.show" center>
     <el-form ref="form" :rules="rules" :model="form">
       <el-form-item label="收支类型:" label-width="120px">
         <el-row>
@@ -56,16 +56,17 @@
 import addProfile from '@/api/profile/addProfile'
 export default {
   name: 'Dialog',
+  props: {
+    dialogStatus: {
+      type: Object,
+      required: true
+    },
+    form: {
+      type: Object,
+    }
+  },
   data () {
     return {
-      form: {
-        remark: '',
-        cash: '',
-        income: '',
-        expend: '',
-        describe: '',
-        type: ''
-      },
       form_type_list: [
         '提现', 
         '提现手续费', 
@@ -90,12 +91,6 @@ export default {
       }
     }
   },
-  props: {
-    dialogStatus: {
-      type: Object,
-      required: true
-    }
-  },
   methods: {
     submitForm (form) {
       this.$refs[form].validate(valid => {
@@ -106,11 +101,11 @@ export default {
       })
     },
     handleAddProfile () {
-      addProfile(this.form)
+      addProfile(this.form, this.dialogStatus.type)
         .then(res => {
           this.$message({
             type: 'success',
-            message: '添加成功'
+            message: '处理成功'
           })
 
           //close dialog

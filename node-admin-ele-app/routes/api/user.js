@@ -8,7 +8,7 @@ const passport = require('passport')
 
 // register
 router.post('/register', (req, res) => {
-    User.findOne({email: req.body.email})
+    User.findOne({ email: req.body.email })
         .then(user => {
             if (user) {
                 res.status(200).json({
@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         newUser.password = hash
-                        // save new user
+                            // save new user
                         newUser.save()
                             .then(user => res.json(user))
                             .catch(err => console.log(err))
@@ -41,10 +41,10 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const email = req.body.email
     const password = req.body.password
-    User.findOne({email})
+    User.findOne({ email })
         .then(user => {
             if (!user) {
-               res.status(404).json('用户不存在')
+                res.status(404).json('用户不存在')
             } else {
                 // check password
                 bcrypt.compare(password, user.password)
@@ -57,7 +57,7 @@ router.post('/login', (req, res) => {
                                 email: user.email,
                                 identity: user.identity
                             }
-                            jwt.sign(rule, secret, {expiresIn: 3600}, (err, token) => {
+                            jwt.sign(rule, secret, { expiresIn: 3600 }, (err, token) => {
                                 res.json({
                                     msg: '登录成功',
                                     token: `Bearer ${token}`
@@ -73,11 +73,11 @@ router.post('/login', (req, res) => {
 })
 
 // getInfo
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
         name: req.user.name,
         id: req.user.id,
-        email:req.user.email,
+        email: req.user.email,
         idendity: req.user.identity
     })
 })

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Wrapper from './components/Wrapper'
 import Index from './components/index'
 import Home from './components/Home'
 import InfoShow from './components/Info'
@@ -19,25 +20,27 @@ const router = new Router({
         },
         {
             path: '/index',
-            name: 'index',
             component: Index,
             children: [{
-                    path: '',
-                    redirect: 'home'
-                },
-                {
-                    path: 'home',
-                    component: Home
-                },
-                {
-                    path: 'fundlist',
-                    component: FundList
-                },
-                {
-                    path: 'infoshow',
-                    component: InfoShow
-                },
-            ]
+                path: '',
+                component: Home
+            }]
+        },
+        {
+            path: '/fund',
+            component: Index,
+            children: [{
+                path: 'fundlist',
+                component: FundList
+            }]
+        },
+        {
+            path: '/info',
+            component: Index,
+            children: [{
+                path: 'infoshow',
+                component: InfoShow
+            }]
         },
         {
             path: '/register',

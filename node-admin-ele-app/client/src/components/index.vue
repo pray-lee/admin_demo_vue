@@ -14,7 +14,7 @@ export default {
   name: 'index',
   components: {
     HeaderNav,
-    LeftNav
+    LeftNav,
   }
 }
 </script>

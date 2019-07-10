@@ -1,7 +1,7 @@
 <template>
   <li v-if="item.children">
     <template v-if="item.children.length == 0">
-      <router-link :to="item.path" class="linkActive">
+      <router-link :to=" '/' + item.path" class="linkActive">
         <el-menu-item :index="item.path">
           <i class="el-icon-menu"></i>
           {{item.name}}
@@ -20,7 +20,7 @@
           v-if="child.children&&child.children.length>0"
           :item="child"
           :key="child.path"/>
-        <router-link :to="child.path" class="linkActive" v-else>
+        <router-link :to="'/' + item.path + '/' + child.path" class="linkActive" v-else>
           <el-menu-item :key="child.path" :index="child.path">
             <i class="el-icon-location"></i>
             {{child.name}}

@@ -24,7 +24,7 @@
     data() {
       return {
         items: [
-          {name: '主页', path: 'home', children: []},
+          {name: '主页', path: '', children: []},
           {name: '资金管理', path: 'fund', children: [{path: 'fundlist', name: '资金流水'}]},
           {name: '信息管理', path: 'info', children: [{path: 'infoshow', name: '个人信息'}]}
         ]
